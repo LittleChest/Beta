@@ -8,7 +8,7 @@ body:
         为了更迅速的处理规则请求，请仔细阅读填写说明并正确填写。
         那么，开始吧！
   - type: checkboxes
-    id: existed
+    id: rule-status
     attributes:
       label: 规则状态
       options:
