@@ -23,7 +23,7 @@ body:
   - type: textarea
     id: Necessary-information
     attributes:
-      label: Necessary information:
+      label: "Necessary information:"
       placeholder: |
         1. If there are errors in the existing rules, please indicate.
         2. If there are some functions not work after isolation or there are special notes, please explain.
