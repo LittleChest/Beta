@@ -6,7 +6,6 @@ body:
       value: |
         感谢使用并向第三方“存储空间隔离”在线规则提交新规则！
         为了更迅速的处理规则请求，请仔细阅读填写说明并正确填写。
-        那么，开始吧！
   - type: checkboxes
     id: rule-status
     attributes:
