@@ -15,7 +15,7 @@ body:
           required: true
   - type: textarea
     attributes:
-      label: Configuration JSON:
+      label: "Configuration JSON:"
       placeholder: Tap in-app "upload icon" (added from v4.3.0), "Copy current settings to clipboard" and then paste to below.
       render: shell
     validations:
