@@ -1,6 +1,8 @@
 name: 构建 PixelExperience
 
 on: [push]
+    push:
+    branches: [ "main" ]
 
 jobs:
   build:
