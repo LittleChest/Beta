@@ -1,0 +1,72 @@
+name: 构建 PixelExperience
+
+on:
+  watch:
+    types: started
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 准备
+        run: |
+          cd ~/
+          git clone https://github.com/akhilnarang/scripts
+          cd scripts
+          ./setup/android_build_env.sh
+
+      - name: 创建目录
+        run: |
+          mkdir -p ~/bin
+          mkdir -p ~/android/pe
+
+      - name: 安装 repo
+        run: |
+          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+          chmod a+x ~/bin/repo
+
+      - name: 配置 Git
+        run: |
+          git config --global user.email "81231195+LittleChest@users.noreply.github.com"
+          git config --global user.name "LittleChest"
+
+      - name: 初始化
+        run: |
+          cd ~/android/pe
+          repo init -u https://github.com/PixelExperience/manifest -b twelve-plus
+
+      - name: 准备设备
+        run: |
+          cd ~/android/pe
+          source build/envsetup.sh
+          lunch aosp_vangogh-userdebug
+
+      - name: 缓存
+        run: |
+          export USE_CCACHE=1
+          export CCACHE_EXEC=/usr/bin/ccache
+          ccache -M 50G
+
+      - name: 构建
+        run: |
+          croot
+          mka bacon -j$(nproc --all)
+
+      - name: 列出文件
+        run: |
+          cd $OUT
+          pwd
+          ls $OUT
+          ls /*
+
+      - name: 导出（根）
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+
+      - name: 导出（默认）
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+         github_token: ${{ secrets.GITHUB_TOKEN }}
+         publish_dir: ./public
