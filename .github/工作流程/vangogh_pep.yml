@@ -1,8 +1,7 @@
 name: 构建 PixelExperience
 
 on:
-  watch:
-    types: started
+  push:
 
 jobs:
   build:
